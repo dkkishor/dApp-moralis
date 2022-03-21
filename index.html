@@ -1,0 +1,63 @@
+<html>
+   <head>
+      <!-- Moralis SDK code -->
+      <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+      <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+      <link rel="stylesheet" href="dAppStyle.css">
+   </head>
+   <body>
+      <center>
+         <h1>Moralis Stats</h1>
+      </center>
+      <form>
+         <div class="container">
+            <div class="row">
+               <div class="column left">
+                  <label>Server URL : </label>
+                  <input type="text" placeholder="Enter Server URL" name="serverUrl"
+                     value="https://osolaupnp1ww.usemoralis.com:2053/server" required>
+               </div>
+               <div class="column right">
+                  <button id="btn-login">Login</button>
+               </div>
+            </div>
+            <div class="row">
+               <div class="column left">
+                  <label>Application Id: </label>
+                  <input type="password" placeholder="Enter Application ID" name="appId"
+                     value="VvGkVWsRD0kUVCLiMT9R9BhAeuLarMP6MBFfjD1O" required>
+               </div>
+               <div class="column right">
+                  <button id="btn-logout">Logout</button>
+               </div>
+            </div>
+         </div>
+      </form>
+      <script>
+         // connect to Moralis server
+         
+         const serverUrl = "https://osolaupnp1ww.usemoralis.com:2053/server";
+         const appId = "VvGkVWsRD0kUVCLiMT9R9BhAeuLarMP6MBFfjD1O";
+         Moralis.start({ serverUrl, appId });
+         
+         
+         // add from here down
+         async function login() {
+           let user = Moralis.User.current();
+           if (!user) {
+             user = await Moralis.authenticate();
+           }
+           console.log("logged in user:", user);
+         }
+         
+         async function logOut() {
+           await Moralis.User.logOut();
+           console.log("logged out");
+         }
+         
+         document.getElementById("btn-login").onclick = login;
+         document.getElementById("btn-logout").onclick = logOut;
+         
+      </script>
+   </body>
+</html>
