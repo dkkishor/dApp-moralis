@@ -1,1 +1,1 @@
-# Decentralized Application with Molaris
+# Decentralized Application with Moralis
